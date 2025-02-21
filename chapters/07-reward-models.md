@@ -27,11 +27,11 @@ $$P(i > j) = \frac{p_i}{p_i + p_j}$$ {#eq:bradterry}
 
 To train a reward model, we must formulate a loss function that satisfies the above relation.
 The first structure applied is to convert a language model into a model that outputs a scalar value, often in the form of a single classification probability logit.
-Thus, we can take the score of this model with two samples, the $i$ and $j$ above are now completions, $y_1$ and $y_2$, to one prompt, $x$ and score both of them with respect to the above model, $r_\theta$.
+Thus, we can take the score of this model with two samples, the $i$ and $j$ above are now completions, $y_w$ and $y_l$, to one prompt, $x$ and score both of them with respect to the above model, $r_\theta$.
 
 The probability of success for a given reward model in a pairwise comparison, becomes:
 
-$$P(y_1 > y_2) = \frac{\exp(r(y_1))}{\exp(r(y_1)) + \exp(r(y_2))}$$ {#eq:bradterryrm}
+$$P(y_w > y_l) = \frac{\exp(r_{\theta}(x, y_w))}{\exp(r_{\theta}(x, y_w)) + \exp(r_{\theta}(x, y_l))}$$ {#eq:bradterryrm}
 
 Then, by taking the gradient with respect to the model parameters, we can arrive at the loss function to train a reward model.
 The first form, as in [@ouyang2022training] and other works:
